@@ -23,10 +23,10 @@ const NAVIGATION_ITEMS = [
     title: "Home",
     icon: BiHomeCircle,
   },
-  // {
-  //   title: "Explore",
-  //   icon: HiOutlineHashtag,
-  // },
+  {
+    title: "Explore",
+    icon: HiOutlineHashtag,
+  },
   {
     title: "Notifications",
     icon: BsBell,
@@ -50,11 +50,11 @@ const NAVIGATION_ITEMS = [
 ];
 const LeftSidebar = () => {
   return (
-    <section className="sticky top-0 w-[24%] h-screen p-2 flex flex-col justify-between">
+    <div className="sticky top-0 w-[22%] h-screen p-2 flex flex-col justify-between">
       <div className="h-full flex flex-col items-stretch space-y-4 ">
         {NAVIGATION_ITEMS.map((item) => (
           <Link
-            className="w-fit rounded-full px-6 py-2 space-x-4 flex text-2xl items-center justify-center hover:bg-white/10 transition duration-200"
+            className="w-fit rounded-full px-6 py-2 space-x-4 ml-2 flex text-xl items-center justify-center hover:bg-white/10 transition duration-200"
             href={
               item.title.toLocaleLowerCase() == "home"
                 ? "/"
@@ -72,13 +72,13 @@ const LeftSidebar = () => {
             {item.title !== "Twitter" && <div>{item.title}</div>}
           </Link>
         ))}
-        <button className="rounded-full bg-twitterColor flex items-center justify-center p-4 mr-4 text-md font-bold hover:bg-opacity-70 transition duration-200">
+        <button className="rounded-full bg-twitterColor flex items-center justify-center p-4 m-5 text-md font-bold hover:bg-opacity-70 transition duration-200">
           Post
         </button>
       </div>
 
-      <button className="rounded-full bg-transparent flex items-stretch justify-between w-full px-3 py-2 hover:bg-white/10 transition duration-200">
-        <div className="flex space-x-3">
+      <button className="rounded-full bg-transparent flex items-stretch justify-between w-full px-3 py-2 mb-2 hover:bg-white/10 transition duration-200">
+        <div className="flex space-x-3 items-center">
           <div className="w-10 h-10 rounded-full bg-slate-500"></div>
           <div className="text-sm flex flex-col items-start">
             <p className="font-semibold">NguyenQuangMinh</p>
@@ -89,7 +89,7 @@ const LeftSidebar = () => {
           <BsThreeDots />
         </div>
       </button>
-    </section>
+    </div>
   );
 };
 
