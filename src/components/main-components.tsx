@@ -118,7 +118,7 @@ const MainComponent = () => {
           </div>
         </button>
         <div className="flex-1 w-full h-full flex p-2 items-center justify-center">
-          <button className="text-xl rounded-full p-2 hover:bg-white/10 cursor-pointer">
+          <button className="text-xl rounded-full p-2 hover:bg-white/10 cursor-pointer text-gray-500">
             <RiSettings5Line />
           </button>
         </div>
@@ -196,7 +196,7 @@ const MainComponent = () => {
             <div className="w-full h-full flex-grow flex flex-col">
               <div className="flex justify-between items-center">
                 <div className="text-sm flex items-center space-x-1">
-                  <p className="font-semibold">Quangminh0512</p>
+                  <p className="font-semibold text-white">Quangminh0512</p>
                   <p className="text-gray-400">@quangminh512</p>
                   <BsDot className="text-xs text-gray-400" />
                   <p className="text-gray-400">1h</p>

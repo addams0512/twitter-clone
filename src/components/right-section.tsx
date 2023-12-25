@@ -23,7 +23,9 @@ const RightSection = () => {
         </div>
       </div>
       <div className="w-full max-h-[900px] bg-neutral-900/90 mt-2 rounded-2xl">
-        <h1 className="text-xl font-bold py-2 px-4">Trends for you</h1>
+        <h1 className="text-xl font-bold py-2 px-4 text-white">
+          Trends for you
+        </h1>
         {Array.from({ length: 10 }).map((_, i) => (
           <div
             key={i}
@@ -31,7 +33,7 @@ const RightSection = () => {
           >
             <div className="flex flex-col justify-start">
               <div className="text-xs text-gray-500">Trending in Vietnam</div>
-              <div className="text-md font-bold">#Muon</div>
+              <div className="text-md font-bold text-white">#Muon</div>
               <div className="text-xs text-gray-500">363k posts</div>
             </div>
             <div className="text-md text-gray-500">
@@ -44,7 +46,7 @@ const RightSection = () => {
         </div>
       </div>
       <div className="w-full h-fit bg-neutral-900/90 mt-2 rounded-2xl flex flex-col">
-        <h1 className="text-xl font-bold py-2 px-4 flex items-center">
+        <h1 className="text-xl font-bold py-2 px-4 flex items-center text-white">
           Who to follow
         </h1>
         {Array.from({ length: 3 }).map((_, i) => (
@@ -55,7 +57,7 @@ const RightSection = () => {
             <div className="flex space-x-3 items-center">
               <div className="rounded-full w-10 h-10 bg-slate-500"></div>
               <div className="flex flex-col justify-center">
-                <div>Quangminh0512</div>
+                <div className="text-white">Quangminh0512</div>
                 <div className="text-gray-500">@quangminh0512</div>
               </div>
             </div>
