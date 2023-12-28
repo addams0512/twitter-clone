@@ -1,11 +1,7 @@
-"use client";
-import React, { useEffect, useRef } from "react";
-import { useState } from "react";
+import React from "react";
 import { RiSettings5Line } from "react-icons/ri";
-import { FaGlobeAmericas, FaImage, FaRegHeart } from "react-icons/fa";
-import { MdGifBox, MdOutlineEmojiEmotions } from "react-icons/md";
+import { FaRegHeart } from "react-icons/fa";
 import {
-  IoLocationOutline,
   IoShareOutline,
   IoStatsChart,
   IoBookmarkOutline,
@@ -13,108 +9,23 @@ import {
 import { HiDotsHorizontal } from "react-icons/hi";
 import { BsDot, BsChat } from "react-icons/bs";
 import { AiOutlineRetweet } from "react-icons/ai";
+import ComposeTweet from "./server-components/compose-tweet";
 
 const MainComponent = () => {
-  const ACCESSIBILITY_BUTTON = [
-    {
-      title: "image",
-      icon: FaImage,
-    },
-    {
-      title: "gif",
-      icon: MdGifBox,
-    },
-    {
-      title: "emoji",
-      icon: MdOutlineEmojiEmotions,
-    },
-    {
-      title: "location",
-      icon: IoLocationOutline,
-    },
-  ];
-
-  const [forYouTab, setForYouTab] = useState<boolean>(true);
-  const [followingTab, setFollowingTab] = useState<boolean>(false);
-  const [postValue, setPostValue] = useState<string>("");
-  const [inputActive, setInputActive] = useState<boolean>(false);
-  const inputRef = useRef<HTMLInputElement>(null);
-
-  const handleClickInput = (): void => {
-    setInputActive(true);
-  };
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    setPostValue(e.target.value);
-  };
-
-  const handleValuePost = (): void => {
-    console.log({ postValue });
-  };
-
-  useEffect(() => {
-    const handleDocumentClick = (
-      event: React.MouseEvent<HTMLInputElement>,
-    ): void => {
-      if (
-        inputRef.current &&
-        !inputRef.current.contains(event.target as HTMLInputElement)
-      ) {
-        setInputActive(false);
-      }
-    };
-
-    document.addEventListener("click", handleDocumentClick as any);
-    return () => {
-      document.removeEventListener("click", handleDocumentClick as any);
-    };
-  }, [inputRef]);
   return (
     <div className="h-full flex flex-col w-[50%]">
       {/* tab content */}
       <div className="border-l-[0.5px] border-r-[0.5px] border-b-[0.5px] border-gray-600 sticky top-0 backdrop-blur bg-black/10 flex items-center justify-between h-[60px] font-semibold text-md">
-        <button
-          onClick={() => {
-            setForYouTab(true);
-            setFollowingTab(false);
-          }}
-          className="flex-grow w-full h-full flex items-center justify-center hover:bg-white/10 transition duration-200"
-        >
+        <button className="flex-grow w-full h-full flex items-center justify-center hover:bg-white/10 transition duration-200">
           <div className="flex flex-col justify-between h-full">
-            <span
-              className={
-                forYouTab
-                  ? "h-full flex items-center text-white"
-                  : "h-full flex items-center text-gray-500"
-              }
-            >
-              For you
-            </span>
-            {forYouTab && (
-              <div className="rounded-full border-2 border-twitterColor"></div>
-            )}
+            <span className="h-full flex items-center text-white">For you</span>
           </div>
         </button>
-        <button
-          onClick={() => {
-            setFollowingTab(true);
-            setForYouTab(false);
-          }}
-          className="flex-grow w-full h-full flex items-center justify-center hover:bg-white/10 transition duration-200"
-        >
+        <button className="flex-grow w-full h-full flex items-center justify-center hover:bg-white/10 transition duration-200">
           <div className="flex flex-col justify-between h-full">
-            <span
-              className={
-                followingTab
-                  ? "h-full flex items-center text-white"
-                  : "h-full flex items-center text-gray-500"
-              }
-            >
+            <span className="h-full flex items-center text-white">
               Following
             </span>
-            {followingTab && (
-              <div className="rounded-full border-2 border-twitterColor"></div>
-            )}
           </div>
         </button>
         <div className="flex-1 w-full h-full flex p-2 items-center justify-center">
@@ -124,63 +35,10 @@ const MainComponent = () => {
         </div>
       </div>
       {/* create tweet */}
-      <div className="h-[160px] border-l-[0.5px] border-r-[0.5px] border-b-[0.5px] border-gray-600 px-4">
-        <div className="w-full h-full space-x-3 flex">
-          <div className="rounded-full w-10 h-10 bg-slate-600 mt-3"></div>
-          <div className="flex-grow flex flex-col mt-2">
-            <div className="h-full flex-1 flex items-center">
-              <input
-                onClick={handleClickInput}
-                onChange={handleInputChange}
-                value={postValue}
-                type="text"
-                placeholder="What is happening?!"
-                className="border-none outline-none bg-transparent py-3 text-xl w-full"
-                ref={inputRef}
-              />
-            </div>
-            <div className="h-full flex flex-col flex-grow">
-              {inputActive && (
-                <div
-                  className={
-                    inputActive
-                      ? "border-gray-600 border-b-[1px] w-full h-full flex items-center py-2 text-sm text-twitterColor font-semibold"
-                      : "w-full h-full flex items-center py-2 text-sm text-twitterColor font-semibold"
-                  }
-                >
-                  <div className="rounded-full flex items-center px-2 space-x-2 hover:bg-twitterColor hover:bg-opacity-75 transition duration-200 hover:text-white cursor-pointer">
-                    <FaGlobeAmericas />
-                    <span>Everyone can reply</span>
-                  </div>
-                </div>
-              )}
-              <div className="h-full flex justify-between">
-                <div className="flex space-x-2 m-2 text-xl text-twitterColor items-center">
-                  {ACCESSIBILITY_BUTTON.map((item) => (
-                    <div
-                      key={item.title}
-                      className="rounded-full hover:bg-twitterColor hover:bg-opacity-75 p-2 transition duration-200 hover:text-white"
-                    >
-                      {<item.icon />}
-                    </div>
-                  ))}
-                </div>
-                <div className="my-2 flex items-center justify-center">
-                  <button
-                    disabled={postValue.length == 0}
-                    onClick={handleValuePost}
-                    className={
-                      postValue.length == 0
-                        ? "rounded-full bg-twitterColor bg-opacity-70 px-4 py-2 font-semibold text-gray-400"
-                        : "rounded-full bg-twitterColor px-4 py-2 hover:bg-opacity-70 transition duration-200 cursor-pointer font-semibold"
-                    }
-                  >
-                    Post
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
+      <div className="h-[120px] border-l-[0.5px] border-r-[0.5px] border-b-[0.5px] border-gray-600 px-4">
+        <div className="w-full h-full flex space-x-2">
+          <div className="rounded-full w-10 h-9 bg-slate-600 mt-3"></div>
+          <ComposeTweet />
         </div>
       </div>
       {/* tweet post */}

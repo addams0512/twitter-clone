@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { BiHomeCircle, BiUser } from "react-icons/bi";
 import {
@@ -11,8 +13,8 @@ import { HiOutlineHashtag } from "react-icons/hi";
 import { RiFileListLine } from "react-icons/ri";
 import { RiCommunityLine } from "react-icons/ri";
 import { HiOutlineDotsCircleHorizontal } from "react-icons/hi";
-
 import { FaXTwitter } from "react-icons/fa6";
+import { createBrowserClient } from "@supabase/ssr";
 
 const NAVIGATION_ITEMS = [
   {
@@ -49,6 +51,16 @@ const NAVIGATION_ITEMS = [
   { title: "More", icon: HiOutlineDotsCircleHorizontal },
 ];
 const LeftSidebar = () => {
+  const supabase = createBrowserClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+  );
+
+  async function logOut() {
+    const { error } = await supabase.auth.signOut();
+    console.log({ error });
+  }
+
   return (
     <div className="sticky top-0 w-[22%] h-screen p-2 flex flex-col justify-between text-white">
       <div className="h-full flex flex-col items-stretch space-y-4 ">
@@ -72,7 +84,10 @@ const LeftSidebar = () => {
             {item.title !== "Twitter" && <div>{item.title}</div>}
           </Link>
         ))}
-        <button className="rounded-full bg-twitterColor flex items-center justify-center p-4 m-5 text-md font-bold hover:bg-opacity-70 transition duration-200">
+        <button
+          onClick={logOut}
+          className="rounded-full bg-twitterColor flex items-center justify-center p-4 m-5 text-md font-bold hover:bg-opacity-70 transition duration-200"
+        >
           Post
         </button>
       </div>
